@@ -21,7 +21,7 @@ LIMIT 10;
 -- option 1
 SELECT *
 FROM customer_purchases
-WHERE product_id = 4 AND product_id = 9;
+WHERE product_id = 4 OR product_id = 9;
 
 -- option 2
 SELECT *
@@ -94,7 +94,7 @@ of customers for them to give stickers to, sorted by last name, then first name.
 
 HINT: This query requires you to join two tables, use an aggregate function, and use the HAVING keyword. */
 
-SELECT cp.customer_id, customer_first_name, customer_last_name, sum(quantity*cost_to_customer_per_qty) AS total_purchase
+SELECT cp.customer_id, customer_first_name, customer_last_name, ROUND(sum(quantity*cost_to_customer_per_qty),2) AS total_purchase
 FROM customer_purchases cp
 INNER JOIN customer c
 	ON cp.customer_id = c.customer_id
