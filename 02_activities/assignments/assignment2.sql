@@ -99,12 +99,6 @@ Hint: you might need to use INSTR(product_name,'-') to find the hyphens. INSTR w
 SELECT *, LTRIM(SUBSTR(product_name,INSTR(product_name,'-')+1)) AS description
 FROM product;
 
-/* 2. Filter the query to show any product_size value that contain a number with REGEXP. */
-
-SELECT *
-FROM product
-WHERE product_size REGEXP '[0-9]';
-
 -- UNION
 /* 1. Using a UNION, write a query that displays the market dates with the highest and lowest total sales.
 
@@ -224,7 +218,8 @@ VALUES (7, 'Apple Pie', '10"', 3, 'unit', CURRENT_TIMESTAMP);
 HINT: If you don't specify a WHERE clause, you are going to have a bad time.*/
 
 DELETE FROM product_units
-WHERE product_id = 7 AND snapshot_timestamp = '2025-08-16 16:53:15';
+WHERE product_id = 7 
+ORDER BY snapshot_timestamp LIMIT 1;
 
 -- UPDATE
 /* 1.We want to add the current_quantity to the product_units table. 
